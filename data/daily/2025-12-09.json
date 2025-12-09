@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sample001",
+    "title": "GPT-4o: OpenAI's New Multimodal Model",
+    "link": "https://example.com/gpt4o",
+    "published": "2025-12-08T10:00:00",
+    "summary": "OpenAI announces GPT-4o, a new multimodal model that can process text, images, and audio simultaneously with improved performance and lower latency.",
+    "source": "OpenAI Blog",
+    "category": "AI Research",
+    "fetched_at": "2025-12-08T10:30:00"
+  },
+  {
+    "id": "sample002",
+    "title": "LLaMA 3: Meta's Open Source Language Model",
+    "link": "https://example.com/llama3",
+    "published": "2025-12-07T14:00:00",
+    "summary": "Meta releases LLaMA 3, an open-source large language model with 70B parameters, achieving state-of-the-art performance on various benchmarks.",
+    "source": "Google AI Blog",
+    "category": "AI Research",
+    "fetched_at": "2025-12-07T15:00:00"
+  },
+  {
+    "id": "sample003",
+    "title": "Transformers.js: Machine Learning in the Browser",
+    "link": "https://example.com/transformersjs",
+    "published": "2025-12-06T09:00:00",
+    "summary": "Hugging Face releases Transformers.js, enabling developers to run transformer models directly in web browsers without server-side processing.",
+    "source": "Hugging Face Blog",
+    "category": "AI Tools",
+    "fetched_at": "2025-12-06T10:00:00"
+  },
+  {
+    "id": "sample004",
+    "title": "MIT Researchers Develop Energy-Efficient AI Chips",
+    "link": "https://example.com/mit-chips",
+    "published": "2025-12-05T12:00:00",
+    "summary": "MIT researchers unveil new AI chip architecture that reduces energy consumption by 95% while maintaining performance, paving the way for edge AI.",
+    "source": "AI News - MIT",
+    "category": "AI Research",
+    "fetched_at": "2025-12-05T13:00:00"
+  },
+  {
+    "id": "sample005",
+    "title": "Understanding Retrieval-Augmented Generation (RAG)",
+    "link": "https://example.com/rag-tutorial",
+    "published": "2025-12-04T08:00:00",
+    "summary": "A comprehensive guide to implementing RAG systems, combining large language models with external knowledge bases for more accurate responses.",
+    "source": "Towards Data Science",
+    "category": "AI News",
+    "fetched_at": "2025-12-04T09:00:00"
+  },
+  {
+    "id": "sample006",
+    "title": "Fine-Tuning LLMs with LoRA: A Practical Guide",
+    "link": "https://example.com/lora-guide",
+    "published": "2025-12-03T11:00:00",
+    "summary": "Learn how to fine-tune large language models efficiently using Low-Rank Adaptation (LoRA), reducing memory requirements and training time.",
+    "source": "Machine Learning Mastery",
+    "category": "AI Tools",
+    "fetched_at": "2025-12-03T12:00:00"
+  }
+]

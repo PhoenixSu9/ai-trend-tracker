@@ -1,0 +1,46 @@
+{
+  "rss_feeds": [
+    {
+      "name": "OpenAI Blog",
+      "url": "https://openai.com/blog/rss.xml",
+      "category": "AI Research"
+    },
+    {
+      "name": "Google AI Blog",
+      "url": "https://blog.research.google/feeds/posts/default",
+      "category": "AI Research"
+    },
+    {
+      "name": "Hugging Face Blog",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "category": "AI Tools"
+    },
+    {
+      "name": "AI News - MIT",
+      "url": "https://news.mit.edu/topic/artificial-intelligence2/feed",
+      "category": "AI Research"
+    },
+    {
+      "name": "Towards Data Science",
+      "url": "https://towardsdatascience.com/feed",
+      "category": "AI News"
+    },
+    {
+      "name": "Machine Learning Mastery",
+      "url": "https://machinelearningmastery.com/feed/",
+      "category": "AI Tools"
+    }
+  ],
+  "output": {
+    "daily_data_dir": "data/daily",
+    "feeds_data_dir": "data/feeds",
+    "reports_dir": "reports",
+    "max_items_per_feed": 10
+  },
+  "report": {
+    "weekly_day": "monday",
+    "include_categories": ["AI Research", "AI Tools", "AI News"],
+    "max_items_per_category": 15,
+    "summary_max_length": 200
+  }
+}

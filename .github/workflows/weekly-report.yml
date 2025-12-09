@@ -1,0 +1,48 @@
+name: AI Trend Tracker - Weekly Report
+
+on:
+  schedule:
+    # Run every Monday at 01:00 UTC (9:00 AM Beijing Time)
+    - cron: '0 1 * * 1'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Generate weekly report
+        run: |
+          python scripts/generate_report.py
+      
+      - name: Commit and push weekly report
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Add reports
+          git add reports/*.md
+          
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No new reports to commit"
+          else
+            WEEK_NUM=$(date +'%Y-W%V')
+            git commit -m "docs: add weekly report ${WEEK_NUM}"
+            git push
+            echo "✓ Pushed weekly report"
+          fi
