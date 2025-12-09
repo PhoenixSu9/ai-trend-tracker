@@ -6,7 +6,7 @@ Aggregates daily data and generates a weekly Markdown report
 
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from collections import defaultdict
 
@@ -24,7 +24,7 @@ def get_week_files(data_dir, days=7):
     files = []
     
     for i in range(days):
-        date = datetime.now() - timedelta(days=i)
+        date = datetime.now(timezone.utc) - timedelta(days=i)
         date_str = date.strftime('%Y-%m-%d')
         file_path = data_path / f"{date_str}.json"
         
@@ -62,7 +62,7 @@ def categorize_articles(articles):
     return categorized
 
 
-def format_article(article, index):
+def format_article(article, index, config):
     """Format a single article as Markdown"""
     title = article['title']
     link = article['link']
@@ -75,8 +75,9 @@ def format_article(article, index):
     if summary:
         # Clean summary
         summary_clean = summary.replace('\n', ' ').strip()
-        if len(summary_clean) > 200:
-            summary_clean = summary_clean[:200] + "..."
+        max_length = config['report'].get('summary_max_length', 200)
+        if len(summary_clean) > max_length:
+            summary_clean = summary_clean[:max_length] + "..."
         md += f"   - 摘要: {summary_clean}\n"
     
     return md
@@ -85,13 +86,13 @@ def format_article(article, index):
 def generate_weekly_report(articles, config):
     """Generate weekly report in Markdown format"""
     # Get date range
-    end_date = datetime.now()
+    end_date = datetime.now(timezone.utc)
     start_date = end_date - timedelta(days=7)
     
     # Generate header
     report = f"# AI 趋势追踪周报\n\n"
     report += f"**报告周期**: {start_date.strftime('%Y-%m-%d')} 至 {end_date.strftime('%Y-%m-%d')}\n\n"
-    report += f"**生成时间**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+    report += f"**生成时间**: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} UTC\n\n"
     report += f"---\n\n"
     
     # Add summary
@@ -126,7 +127,7 @@ def generate_weekly_report(articles, config):
         report += f"本分类共 {len(articles_in_category)} 篇文章，展示前 {len(articles_to_show)} 篇：\n\n"
         
         for idx, article in enumerate(articles_to_show, 1):
-            report += format_article(article, idx) + "\n"
+            report += format_article(article, idx, config) + "\n"
         
         report += "\n"
     
@@ -145,9 +146,10 @@ def generate_weekly_report(articles, config):
 
 def save_report(report, output_dir):
     """Save weekly report to file"""
-    today = datetime.now().strftime('%Y-%m-%d')
-    week_num = datetime.now().isocalendar()[1]
-    year = datetime.now().year
+    now = datetime.now(timezone.utc)
+    today = now.strftime('%Y-%m-%d')
+    week_num = now.isocalendar()[1]
+    year = now.year
     
     output_file = Path(output_dir) / f"weekly-report-{year}-W{week_num:02d}-{today}.md"
     output_file.parent.mkdir(parents=True, exist_ok=True)

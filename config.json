@@ -40,6 +40,7 @@
   "report": {
     "weekly_day": "monday",
     "include_categories": ["AI Research", "AI Tools", "AI News"],
-    "max_items_per_category": 15
+    "max_items_per_category": 15,
+    "summary_max_length": 200
   }
 }

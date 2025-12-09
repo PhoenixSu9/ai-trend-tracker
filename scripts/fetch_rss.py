@@ -20,9 +20,9 @@ def load_config():
 
 
 def generate_article_id(title, link):
-    """Generate unique ID for an article"""
+    """Generate unique ID for an article using SHA-256"""
     content = f"{title}{link}"
-    return hashlib.md5(content.encode()).hexdigest()
+    return hashlib.sha256(content.encode()).hexdigest()
 
 
 def fetch_rss_feed(feed_url, feed_name, category, max_items):
@@ -39,7 +39,7 @@ def fetch_rss_feed(feed_url, feed_name, category, max_items):
                 'title': entry.get('title', 'No Title'),
                 'link': entry.get('link', ''),
                 'published': entry.get('published', entry.get('updated', '')),
-                'summary': entry.get('summary', entry.get('description', ''))[:300],
+                'summary': (entry.get('summary', entry.get('description', '')) or '')[:300],
                 'source': feed_name,
                 'category': category,
                 'fetched_at': datetime.now().isoformat()
